@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methods of primitives</title>
+</head>
+<body>
+    <script>
+        //Methods of primitives
+        //distinctions between primitives and objects
+
+        /*
+        A primitive
+        Is a value of a primitive type.
+        There are 7 primitive types: string, number, bigint, boolean, symbol, null and undefined.
+        */
+
+        /*
+        An object
+        Is capable of storing multiple values as properties.
+        Can be created with {}, for instance: {name: "John", age: 30}. There are other kinds of objects in JavaScript: functions, for example, are objects.
+        */
+
+
+        //A primitive as an object
+
+        //There are many things one would want to do with a primitive, like a string or a number. It would be great to access them using methods.
+        //Primitives must be as fast and lightweight as possible.
+
+        let name="yash patel"
+        console.log(name.toUpperCase());
+
+        //A number has methods of its own, for instance, toFixed(n)
+
+        let a=12.45673
+        console.log(a.toFixed(2));
+    </script>
+</body>
+</html>
