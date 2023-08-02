@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Symbol type
+
+        //only two primitive types may serve as object property keys:
+
+        /* string type, or
+           symbol type.
+        */
+
+        //Otherwise, if one uses another type, such as number, it’s autoconverted to string. So that obj[1] is the same as obj["1"], and obj[true] is the same as obj["true"].
+
+
+        //Symbols
+
+        //A “symbol” represents a unique identifier.
+
+        let a=Symbol("Yash");
+        let b=Symbol("Yash");
+
+        console.log(a==b); //false
+
+        //Symbols don’t auto-convert to a string
+
+        let id = Symbol("id");
+        alert(id); // TypeError: Cannot convert a Symbol value to a string
+
+
+        let id1 = Symbol("id1");
+        alert(id.toString()); // Symbol(id1), now it works
+
+        alert(id1.description);//Only discription will be show
+
+
+        //Global symbols
+
+        // read from the global registry
+        id = Symbol.for("id"); // if the symbol did not exist, it is created
+
+        // read it again (maybe from another part of the code)
+        idAgain = Symbol.for("id");
+
+        // the same symbol
+        alert( id === idAgain ); // true
+
+
+        //Symbol.keyFor
+
+        let userId=Symbol.for("id");
+        let userName=Symbol.for("name");
+
+        //get name by Symbol
+
+        alert(Symbol.keyFor(userId));
+        alert(Symbol.keyFor(userName));
+
+
+
+        let globalSymbol = Symbol.for("name");
+        let localSymbol=Symbol("name");
+
+        alert(Symbol.keyFor(globalSymbol));
+        alert(Symbol.keyFor(localSymbol));
+        alert(localSymbol.description);
+        alert(globalSymbol.description);
+
+        //System symbols
+
+        /*
+        Symbol.hasInstance
+        Symbol.isConcatSpreadable
+        Symbol.iterator
+        Symbol.toPrimitive
+        …and so on.
+        */
+    </script>
+</body>
+</html>
