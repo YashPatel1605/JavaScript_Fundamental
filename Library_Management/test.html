@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        // Function to create a book object
+        function createBook(title, author, isbn) {
+            return {
+                title: title,
+                author: author,
+                isbn: isbn,
+                checkedOut: false
+            };
+        }
+
+        // Sample data for library array
+        const library = [
+            {
+                title: "To Kill a Mockingbird",
+                author: "Harper Lee",
+                isbn: "978-0-06-112008-4",
+                checkedOut: false
+            },
+            {
+                title: "1984",
+                author: "George Orwell",
+                isbn: "978-0-452-28423-4",
+                checkedOut: true
+            },
+            {
+                title: "Brave New World",
+                author: "Aldous Huxley",
+                isbn: "978-0-06-085052-4",
+                checkedOut: false
+            }
+        ];
+
+        // Function to add a book to the library
+        function addBookToLibrary(book) {
+            library.push(book);
+        }
+
+        // Function to checkout a book
+        function checkoutBook(isbn) {
+            const book = library.find(book => book.isbn === isbn);
+            if (book) {
+                book.checkedOut = true;
+                console.log(`Book "${book.title}" has been checked out.`);
+            } else {
+                console.log("Book not found.");
+            }
+        }
+
+        // Function to return a book
+        function returnBook(isbn) {
+            const book = library.find(book => book.isbn === isbn);
+            if (book) {
+                book.checkedOut = false;
+                console.log(`Book "${book.title}" has been returned.`);
+            } else {
+                console.log("Book not found.");
+            }
+        }
+
+        // Function to find books by a specific author
+        function findBooksByAuthor(author) {
+            return library.filter(book => book.author === author);
+        }
+
+        // Test cases
+        const book1 = createBook("The Great Gatsby", "F. Scott Fitzgerald", "978-0-7432-7356-5");
+        const book2 = createBook("Pride and Prejudice", "Jane Austen", "978-0-14-143951-8");
+
+        addBookToLibrary(book1);
+        addBookToLibrary(book2);
+
+        checkoutBook("978-0-452-28423-4");
+        returnBook("978-0-452-28423-4");
+
+        const booksByAuthor = findBooksByAuthor("Aldous Huxley");
+        console.log("Books by Aldous Huxley:", booksByAuthor);
+
+        console.log(library);
+    </script>
+</body>
+
+</html>
