@@ -8,42 +8,46 @@
 
 <body>
     <script>
-        // Function to create a book object
-        function createBook(title, author, isbn) {
-            return {
-                title: title,
-                author: author,
-                isbn: isbn,
-                checkedOut: false
-            };
-        }
-
-        // Sample data for library array
         const library = [
             {
-                title: "To Kill a Mockingbird",
-                author: "Harper Lee",
+                title: "The India Story",
+                author: "Bimal Jalal",
                 isbn: "978-0-06-112008-4",
                 checkedOut: false
             },
             {
-                title: "1984",
-                author: "George Orwell",
+                title: "Listen to Your Heart: The London Adventure",
+                author: "Ruskin Bond",
                 isbn: "978-0-452-28423-4",
                 checkedOut: true
             },
             {
-                title: "Brave New World",
-                author: "Aldous Huxley",
+                title: "40 Years with Abdul Kalam-Untold Stories",
+                author: "Dr. A. Sivathanu Pillai",
                 isbn: "978-0-06-085052-4",
                 checkedOut: false
             }
         ];
+        // Function to create a book object
+        function createBook(title, author, isbn) {
+            return {
+                title,
+                author,
+                isbn,
+                checkedOut: false
+            };
+        }
+        const book1 = createBook("Making of New India", "	Dr. Bibek Debroy", "978-0-7432-7356-5");
+        const book2 = createBook("Role of Labour in India's Development", "	Labour Minister Bhupendra Yadav", "978-0-14-143951-8");
 
         // Function to add a book to the library
         function addBookToLibrary(book) {
             library.push(book);
         }
+        addBookToLibrary(book1);
+        addBookToLibrary(book2);
+        
+        console.log(library);
 
         // Function to checkout a book
         function checkoutBook(isbn) {
@@ -55,6 +59,7 @@
                 console.log("Book not found.");
             }
         }
+        checkoutBook("978-0-452-28423-4");
 
         // Function to return a book
         function returnBook(isbn) {
@@ -66,26 +71,15 @@
                 console.log("Book not found.");
             }
         }
+        returnBook("978-0-452-28423-4");
 
         // Function to find books by a specific author
         function findBooksByAuthor(author) {
             return library.filter(book => book.author === author);
         }
 
-        // Test cases
-        const book1 = createBook("The Great Gatsby", "F. Scott Fitzgerald", "978-0-7432-7356-5");
-        const book2 = createBook("Pride and Prejudice", "Jane Austen", "978-0-14-143951-8");
-
-        addBookToLibrary(book1);
-        addBookToLibrary(book2);
-
-        checkoutBook("978-0-452-28423-4");
-        returnBook("978-0-452-28423-4");
-
-        const booksByAuthor = findBooksByAuthor("Aldous Huxley");
-        console.log("Books by Aldous Huxley:", booksByAuthor);
-
-        console.log(library);
+        const booksByAuthor = findBooksByAuthor("Dr. A. Sivathanu Pillai");
+        console.log("Books by Dr. A. Sivathanu Pillai:", booksByAuthor);
     </script>
 </body>
 
