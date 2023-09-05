@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Tasks 1</title>
+</head>
+<body>
+    <script>
+        const library = [
+            {
+                title: "To Kill a Mockingbird",
+                author: "Harper Lee",
+                isbn: "978-0-006-112008-4",
+                checkedOut: false,
+                checkoutCount: 0,
+                rating: []
+            },
+            {
+                title: "1984",
+                author: "George Orwell",
+                isbn: "978-0-452-28423-4",
+                checkedOut: true,
+                checkoutCount: 1,
+                rating: [5]
+            },
+            {
+                title: "Brave New World",
+                author: "Aldous Huxley",
+                isbn: "978-0-006-085052-4",
+                checkedOut: false,
+                checkoutCount: 3,
+                rating: []
+            }
+        ];
+
+        //===>1]Limit Number of Checkouts
+
+        const MAX_CHECKOUTS = 3;
+
+        function checkoutBook(isbn) {
+            const book = library.find(book => book.isbn === isbn);
+
+            if (!book) {
+                console.log("Book not found.");
+                return;
+            }
+
+            if (book.checkedOut) {
+                console.log("Book is already checked out.");
+                return;
+            }
+
+            if (book.checkoutCount >= MAX_CHECKOUTS) {
+                console.log("Maximum checkout limit reached for this book.");
+                return;
+            }
+
+            book.checkedOut = true;
+            book.checkoutCount++;
+            console.log(`Checked out "${book.title}" by ${book.author}`);
+        }
+
+        // Example use
+        checkoutBook("978-0-006-112008-4");
+        checkoutBook("978-0-452-28423-4");
+        checkoutBook("978-0-006-085052-4");
+
+        //===>3]Book Rating System
+
+        function rateBook(isbn, rating) {
+            const book = library.find((book) => book.isbn === isbn);
+            if (book) {
+                if (!book.rating) {
+                    book.rating = [];
+                }
+                book.rating.push(rating);
+                console.log(`Rated ${book.title} with ${rating} stars.`);
+            } else {
+                console.log("Book not found.");
+            }
+        }
+
+        function getAverageRating(isbn) {
+            const book = library.find((book) => book.isbn === isbn);
+            if (book && book.rating) {
+                const sum = book.rating.reduce((total, rating) => total + rating, 0);
+                return sum / book.rating.length;
+            } else {
+                return 0;
+            }
+        }
+
+        rateBook("978-0-006-112008-4", 4);
+        rateBook("978-0-452-28423-4", 5);
+        console.log(getAverageRating("978-0-006-112008-4"));
+        console.log(getAverageRating("978-0-452-28423-4"));
+
+
+        //===>4]Search Functionality
+
+        function searchBooks(query) {
+            query = query.toLowerCase();
+            return library.filter((book) =>
+                book.title.toLowerCase().includes(query) || book.author.toLowerCase().includes(query)
+            );
+        }
+        console.log(searchBooks("George Orwell"));
+        console.log(searchBooks("mocking"))
+
+        //===>5]Duplicate ISBN Check
+
+        function addBookToLibrary(book) {
+            const existingBook = library.find((existingBook) => existingBook.isbn === book.isbn);
+            if (existingBook) {
+                console.log("Duplicate ISBN. Book not added.");
+            } else {
+                library.push(book);
+                console.log(`Added: ${book.title}`);
+            }
+        }
+        const newBook = {
+            title: "The Great Gatsby",
+            author: "F. Scott Fitzgerald",
+            isbn: "978-0-7432-7356-5",
+            checkedOut: false
+        };
+        addBookToLibrary(newBook);
+        addBookToLibrary(newBook);
+
+        //===>6]Sort Books
+
+        function sortLibrary(criteria) {
+            if (criteria === "title") {
+                library.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (criteria === "author") {
+                library.sort((a, b) => a.author.localeCompare(b.author));
+            } else if (criteria === "average rating") {
+                library.sort((a, b) => getAverageRating(b.isbn) - getAverageRating(a.isbn));
+            } else {
+                console.log("Invalid sorting criteria.");
+            }
+        }
+        sortLibrary("title");
+        console.log(library);
+    </script>
+</body>
+
+</html>
