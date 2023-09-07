@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Tasks 1</title>
 </head>
+
 <body>
     <script>
         const library = [
@@ -143,6 +145,25 @@
         }
         sortLibrary("title");
         console.log(library);
+
+        //Advanced Storage
+
+        function saveLibrary() {
+            const libraryJSON = JSON.stringify(library);
+            localStorage.setItem('library', libraryJSON);
+        }
+        function loadLibrary() {
+            const libraryJSON = localStorage.getItem('library');
+            if (libraryJSON) {
+                library = JSON.parse(libraryJSON);
+            }
+        }
+        loadLibrary();
+
+        // For example:
+        library[0].rating.push(4);
+        saveLibrary(); // Save the updated library to localStorage
+
     </script>
 </body>
 
