@@ -16,7 +16,8 @@
                 isbn: "978-0-006-112008-4",
                 checkedOut: false,
                 checkoutCount: 0,
-                rating: []
+                rating: [],
+                dueDate: null // Initialize dueDate to null for all books
             },
             {
                 title: "1984",
@@ -24,7 +25,8 @@
                 isbn: "978-0-452-28423-4",
                 checkedOut: true,
                 checkoutCount: 1,
-                rating: [5]
+                rating: [5],
+                dueDate: new Date('2023-09-11') // Set the due date when the book is checked out
             },
             {
                 title: "Brave New World",
@@ -32,10 +34,10 @@
                 isbn: "978-0-006-085052-4",
                 checkedOut: false,
                 checkoutCount: 3,
-                rating: []
+                rating: [],
+                dueDate: null // Initialize dueDate to null for all books
             }
         ];
-
         //===>1]Limit Number of Checkouts
 
         const MAX_CHECKOUTS = 3;
@@ -68,6 +70,25 @@
         checkoutBook("978-0-452-28423-4");
         checkoutBook("978-0-006-085052-4");
 
+        //===>2]Overdue Books
+
+        function listOverdueBooks() {
+            const currentDate = new Date();
+            const overdueBooks = [];
+
+            for (const book of library) {
+                if (book.checkedOut && book.dueDate && currentDate > book.dueDate) {
+                    overdueBooks.push(book);
+                }
+            }
+
+            return overdueBooks;
+        }
+
+        const overdueBooks = listOverdueBooks();
+        console.log("Overdue Books:");
+        console.log(overdueBooks);
+        
         //===>3]Book Rating System
 
         function rateBook(isbn, rating) {
@@ -149,13 +170,13 @@
         //Advanced Storage
 
         function saveLibrary() {
-            const libraryJSON = JSON.stringify(library);
+            let libraryJSON = JSON.stringify(library);
             localStorage.setItem('library', libraryJSON);
         }
         function loadLibrary() {
-            const libraryJSON = localStorage.getItem('library');
+            let libraryJSON = localStorage.getItem('library');
             if (libraryJSON) {
-                library = JSON.parse(libraryJSON);
+              let library = JSON.parse(libraryJSON);
             }
         }
         loadLibrary();
